@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         
         stopRecordingButton.isEnabled = true
         
-        recordingLabel.text = "Now Recording"
+        recordingLabel.text = "Recording in Progress"
         print("recording button pressed")
     }
     
@@ -43,7 +43,7 @@ class ViewController: UIViewController {
         
         stopRecordingButton.isEnabled = false
         
-        recordingLabel.text = "Not Recording"
+        recordingLabel.text = "Tap to Recording"
         print("stop recroding button pressed")
     }
     
