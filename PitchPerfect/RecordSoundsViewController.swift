@@ -26,17 +26,10 @@ class RecordSoundsViewController: UIViewController , AVAudioRecorderDelegate  {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     @IBAction func startRecording(_ sender: Any) {
         
-        startRecordingButton.isEnabled = false
-        stopRecordingButton.isEnabled = true
-        recordingLabel.text = "Recording in Progress"
+        toggleStartStopButtons()
         
         let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,.userDomainMask, true)[0] as String
         
@@ -59,10 +52,12 @@ class RecordSoundsViewController: UIViewController , AVAudioRecorderDelegate  {
     
     @IBAction func stopRecording(_ sender: Any) {
         
+        toggleStartStopButtons()
+        /*
         startRecordingButton.isEnabled = true
         stopRecordingButton.isEnabled = false
         recordingLabel.text = "Tap to Recording"
-        
+        */
         audioRecorder.stop()
         let audioSession = AVAudioSession.sharedInstance()
         try! audioSession.setActive(false)
@@ -91,6 +86,12 @@ class RecordSoundsViewController: UIViewController , AVAudioRecorderDelegate  {
             let recordedAudioURL = sender as! URL
             playSoundsVC.recordedAudioURL = recordedAudioURL
         }
+    }
+    
+    func toggleStartStopButtons () {
+        startRecordingButton.isEnabled = !startRecordingButton.isEnabled
+        stopRecordingButton.isEnabled = !stopRecordingButton.isEnabled
+        recordingLabel.text = (startRecordingButton.isEnabled) ? "Tap to Record" : "Recording in progress"
     }
 
 }
